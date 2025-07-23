@@ -1,0 +1,9 @@
+{
+  "smtp_server": "172.16.30.21",
+  "smtp_port": 25,
+  "mail_from": "logonreport@technoteam.de",
+  "mail_to": "thomas.schmidt@technoteam.de",
+  "report_subject": "AD Fehlanmeldungen",
+  "db_path": "C:\\Scripts\\logon_failures.sqlite",
+  "eventlog_lookback_days": 1
+}
