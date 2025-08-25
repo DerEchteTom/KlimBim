@@ -7,3 +7,4 @@ krb5.conf
 .editorconfig
 .gitattributes
 sso_http.keytab
+serial
