@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Installations-Snapshot & Reporting-System – Dokumentation</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.5; background-color: #fdfdfd; color: #222; }
+    h1, h2, h3 { color: #003366; }
+    code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+    table { border-collapse: collapse; margin: 10px 0; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+    th { background-color: #eee; }
+    .note { background-color: #ffffe0; padding: 10px; border: 1px solid #ccc; }
+</style>
+</head>
+<body>
+
+<h1>🧰 Installations-Snapshot & Reporting-System</h1>
+<p>Ein PowerShell-basiertes Tool zur Erfassung, Speicherung und Visualisierung installierter Anwendungen auf einem Windows-System. Ideal für Systemanalysen, Change-Tracking und Software-Inventarisierung.</p>
+
+<hr>
+
+<h2>📁 Projektstruktur</h2>
+<ul>
+<li><strong>installations.db</strong>: SQLite-Datenbank</li>
+<li><strong>InitDatabase.ps1</strong>: Erstellt die Datenbankstruktur</li>
+<li><strong>SnapshotManager.ps1</strong>: Erfasst installierte Anwendungen</li>
+<li><strong>GenerateDiff.ps1</strong>: Erstellt differenzierten HTML-Bericht</li>
+<li><strong>GenerateReport.ps1</strong>: Erstellt globalen Gesamtbericht</li>
+<li><strong>helper.ps1</strong>: SQLite-Schnittstelle via Invoke-SqliteCli</li>
+<li><strong>send.ps1</strong>: Versand von Reports per E-Mail</li>
+<li><strong>report_YYYYMMDD_HHMM.html</strong>: Generierte Berichte</li>
+</ul>
+
+<hr>
+
+<h2>⚙️ Komponenten und Funktionen</h2>
+
+<h3>InitDatabase.ps1</h3>
+<p>Initialisiert die Datenbank <code>installations.db</code> mit Tabellen <code>Snapshots</code> und <code>SnapshotApps</code>.</p>
+
+<h3>SnapshotManager.ps1</h3>
+<ul>
+<li><strong>Get-StableKey(name, version, publisher)</strong> – erstellt stabilen Hash-Schlüssel aus Name/Version/Publisher</li>
+<li><strong>Convert-InstallDate(rawDate)</strong> – formatiert Registry-Datum</li>
+<li><strong>Get-InstalledApps()</strong> – listet installierte Anwendungen aus der Registry auf</li>
+<li><strong>Show-AllSnapshots()</strong> – zeigt alle Snapshots mit Typ an</li>
+<li><strong>Deduplication</strong> – Sortierung und Gruppierung nach StableKey</li>
+<li><strong>ScanHash</strong> – SHA-256 über sortierte StableKeys</li>
+<li><strong>Diff-Prüfung</strong> – SQL-Vergleich auf neue, entfernte oder geänderte Apps</li>
+</ul>
+
+<h3>GenerateDiff.ps1</h3>
+<p>Erzeugt einen HTML-Bericht, der Unterschiede zwischen gewählten Snapshots auflistet, inkl. Filteroptionen (Publisher, Datum).</p>
+
+<h3>GenerateReport.ps1</h3>
+<p>Erstellt einen <strong>vollständigen globalen HTML-Report</strong> mit allen Snapshots und zugehörigen Apps.</p>
+<ul>
+<li>Ordnererstellung <code>.\report</code> falls nötig</li>
+<li>Zeitstempel &amp; Dateiname</li>
+<li>HTML-Layout &amp; Styles</li>
+<li><strong>Add-TableSection</strong>: wandelt SQL-Ausgabe in HTML-Tabellen um</li>
+<li>Abschnitte: Snapshot Overview, Installed Applications per Snapshot, Installation Timeline, App Count Trend</li>
+<li>Ausgabe nach <code>.\report\report_YYYYMMDD_HHMM.html</code></li>
+</ul>
+
+<h3>helper.ps1</h3>
+<p>Stellt <code>Invoke-SqliteCli</code> bereit, um SQL-Befehle gegen die DB auszuführen.</p>
+
+<h3>send.ps1</h3>
+<p>Versendet per E-Mail einen Snapshot- oder Gesamtbericht.</p>
+<ul>
+<li>SMTP-Parameter (Server, Port, Auth)</li>
+<li>From, To, Subject, Body (Text/HTML)</li>
+<li>Anhang: z. B. <code>.\report\report_YYYYMMDD_HHMM_diff.html</code></li>
+</ul>
+
+<hr>
+
+<h2>🧱 Datenbankstruktur</h2>
+
+<h3>Snapshots</h3>
+<table>
+<tr><th>Spalte</th><th>Typ</th><th>Beschreibung</th></tr>
+<tr><td>SnapshotID</td><td>INTEGER</td><td>Primärschlüssel</td></tr>
+<tr><td>CreatedAt</td><td>TEXT</td><td>Zeitstempel</td></tr>
+<tr><td>Note</td><td>TEXT</td><td>Freitext</td></tr>
+<tr><td>AppCount</td><td>INTEGER</td><td>Anzahl Apps</td></tr>
+<tr><td>ScanHash</td><td>TEXT</td><td>SHA-256 über StableKeys</td></tr>
+<tr><td>IsInitial</td><td>INTEGER</td><td>1=Initial, 0=Incremental</td></tr>
+</table>
+
+<h3>SnapshotApps</h3>
+<table>
+<tr><th>Spalte</th><th>Typ</th><th>Beschreibung</th></tr>
+<tr><td>SnapshotID</td><td>INTEGER</td><td>Referenz auf Snapshots</td></tr>
+<tr><td>StableKey</td><td>TEXT</td><td>Deterministischer Schlüssel</td></tr>
+<tr><td>UniqueKey</td><td>TEXT</td><td>Quellschlüssel</td></tr>
+<tr><td>DisplayName</td><td>TEXT</td><td>Name der App</td></tr>
+<tr><td>Version</td><td>TEXT</td><td>Versionsnummer</td></tr>
+<tr><td>Publisher</td><td>TEXT</td><td>Herausgeber</td></tr>
+<tr><td>Source</td><td>TEXT</td><td>Quelle (HKLM/WOW6432/HKCU)</td></tr>
+<tr><td>InstallDate</td><td>TEXT</td><td>Installationsdatum</td></tr>
+</table>
+
+<hr>
+
+<h2>🚀 Nutzung</h2>
+<ol>
+<li><strong>Datenbank initialisieren:</strong> <code>.\InitDatabase.ps1</code></li>
+<li><strong>Snapshot erstellen:</strong> <code>.\SnapshotManager.ps1</code></li>
+<li><strong>Diff-Report generieren:</strong> <code>.\GenerateDiff.ps1</code></li>
+<li><strong>Globalen Report generieren:</strong> <code>.\GenerateReport.ps1</code></li>
+<li><strong>Report anzeigen:</strong> <code>Start-Process .\report\report_YYYYMMDD_HHMM.html</code></li>
+</ol>
+
+<hr>
+
+<h2>🛠️ Debugging und Diff-Checks</h2>
+<ul>
+<li><strong>Deterministik:</strong> Vor Dedup sortieren nach StableKey, UniqueKey; pro Key erster Eintrag</li>
+<li><strong>Vergleich alt/neu:</strong> <code>Compare-Object</code> zwischen (StableKey, Version)</li>
+<li><strong>Skip-Bedingung:</strong> ScanHash gleich → kein Snapshot, sonst Incremental</li>
+</ul>
+
+<hr>
+
+<h2>✉️ E-Mail-Versand (send.ps1)</h2>
+<p>Versendet eine E-Mail mit Snapshot-Infos und optional dem HTML-Report als Anhang.</p>
+<pre>.\send.ps1 -To "it@example.com" -Subject "Daily snapshot report" -Attach ".\report\report_YYYYMMDD_HHMM_diff.html"</pre>
+<p class="note">Kann automatisiert am Ende von <code>GenerateDiff.ps1</code>, <code>GenerateReport.ps1</code> oder <code>SnapshotManager.ps1</code> aufgerufen werden.</p>
+
+</body>
+</html>

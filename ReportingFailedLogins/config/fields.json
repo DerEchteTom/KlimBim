@@ -1,0 +1,152 @@
+{
+  "TimeStamp": {
+    "enabled": true,
+    "position": 1,
+    "label": { "en": "Timestamp" }
+  },
+  "SubjectUserName": {
+    "enabled": false,
+    "position": 2,
+    "label": { "en": "Subject Username" }
+  },
+  "WorkstationName": {
+    "enabled": true,
+    "position": 3,
+    "label": { "en": "Workstation Name" }
+  },
+  "FailureReason": {
+    "enabled": false,
+    "position": 4,
+    "label": { "en": "Failure Reason" }
+  },
+  "LogonTypeName": {
+    "enabled": true,
+    "position": 5,
+    "label": { "en": "Logon Type" }
+  },
+  "SourceNetworkAddress": {
+    "enabled": true,
+    "position": 6,
+    "label": { "en": "Source Network Address" }
+  },
+  "TargetUserName": {
+    "enabled": true,
+    "position": 7,
+    "label": { "en": "Target Username" }
+  },
+  "ProcessName": {
+    "enabled": false,
+    "position": 8,
+    "label": { "en": "Process Name" }
+  },
+  "TransitedServices": {
+    "enabled": false,
+    "position": 9,
+    "label": { "en": "Transited Services" }
+  },
+  "AuthenticationPackageName": {
+    "enabled": false,
+    "position": 10,
+    "label": { "en": "Authentication Package" }
+  },
+  "FailureDescription": {
+    "enabled": true,
+    "position": 11,
+    "label": { "en": "Failure Description" }
+  },
+  "EventID": {
+    "enabled": false,
+    "position": 12,
+    "label": { "en": "Event ID" }
+  },
+  "SubjectUserSid": {
+    "enabled": false,
+    "position": 13,
+    "label": { "en": "Subject SID" }
+  },
+  "SubjectDomainName": {
+    "enabled": false,
+    "position": 14,
+    "label": { "en": "Subject Domain" }
+  },
+  "SubjectLogonId": {
+    "enabled": false,
+    "position": 15,
+    "label": { "en": "Subject Logon ID" }
+  },
+  "LogonType": {
+    "enabled": false,
+    "position": 16,
+    "label": { "en": "Logon Type (Code)" }
+  },
+  "TargetUserSid": {
+    "enabled": false,
+    "position": 17,
+    "label": { "en": "Target SID" }
+  },
+  "TargetDomainName": {
+    "enabled": false,
+    "position": 18,
+    "label": { "en": "Target Domain" }
+  },
+  "StatusCode": {
+    "enabled": false,
+    "position": 19,
+    "label": { "en": "Status Code" }
+  },
+  "SubStatusCode": {
+    "enabled": false,
+    "position": 20,
+    "label": { "en": "Substatus Code" }
+  },
+  "SourcePort": {
+    "enabled": false,
+    "position": 21,
+    "label": { "en": "Source Port" }
+  },
+  "ProcessId": {
+    "enabled": false,
+    "position": 22,
+    "label": { "en": "Process ID" }
+  },
+  "LogonProcessName": {
+    "enabled": false,
+    "position": 23,
+    "label": { "en": "Logon Process" }
+  },
+  "PackageName": {
+    "enabled": false,
+    "position": 24,
+    "label": { "en": "Package Name" }
+  },
+  "KeyLength": {
+    "enabled": false,
+    "position": 25,
+    "label": { "en": "Key Length" }
+  },
+  "ResolvedHost": {
+    "enabled": true,
+    "position": 26,
+    "label": { "en": "Resolved Host" }
+  },
+  "DCSource": {
+    "enabled": false,
+    "position": 27,
+    "label": { "en": "Domain Controller" }
+  },
+  "AccountName": {
+    "enabled": false,
+    "position": 28,
+    "label": { "en": "Account Name" }
+  },
+  "SubFailureDescription": {
+    "enabled": true,
+    "position": 29,
+    "label": { "en": "Subfailure Description" }
+  },
+  "FailureReasonDescription": {
+    "enabled": true,
+    "position": 30,
+    "label": { "en": "Failure Reason Description" }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "SqliteExe":    "bin/sqlite3.exe",
+  "DatabaseFile": "data/failed_logins.db",
+  "MetaFile":     "data/reportmeta.json",
+  "FieldsFile":   "config/fields.json",
+  "ExcludedUsers": "config/excludedUsers.json",
+
+  "DataDir":      "data",
+  "LogDir":       "log",
+  "ReportDir":    "report",
+  "MetaDir":      "data",
+  "EventLogName": "Security",
+  "EventIDs":     [4625]
+}
