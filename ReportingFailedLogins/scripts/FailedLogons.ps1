@@ -8,7 +8,7 @@ $DatabaseFile    = Get-DatabasePath -Validate:$false
 $MetaDataFile    = Get-DatabasePath -Validate:$false  # separat, editierbar
 $EventLogName      = Get-ConfigValue 'EventLogName'
 $EventIDs          = @(Get-ConfigValue 'EventIDs')
-$DomainControllers = @('ttbvmdc01', 'ttbvmdc02')
+$DomainControllers = @('ad-server1', 'adserver2')
 $EnrichmentScript  = "Enrichment.ps1"
 
 Write-Host ""
