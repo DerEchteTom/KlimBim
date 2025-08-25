@@ -283,10 +283,10 @@ $Body     = "New CVE entries have been found.`nYou can view the report here:`n$H
 # === Block 10: E-Mail-Versand mit Logging und Link ===
 
 # SMTP-Konfiguration (ohne Authentifizierung, ohne SSL)
-$SmtpServer = "172.16.30.21"
+$SmtpServer = "SMTP IP"
 $SmtpPort   = 25
-$From       = "noreply@technoteam.de"
-$To         = "thomas.schmidt@technoteam.de"
+$From       = "noreply@domain.de"
+$To         = "user@domain.de"
 $Subject    = "New Security Information"
 
 # Steuerung: E-Mail-Versand und Logging aktivieren/deaktivieren
