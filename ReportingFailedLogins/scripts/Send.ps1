@@ -56,9 +56,9 @@ $htmlFilePath  = Get-HtmlReportPath -metaFilePath $metaPath
 
 # Default values
 $TopN            = 25
-$To              = "thomas.schmidt@technoteam.de"
-$From            = "noreply@technoteam.de"
-$SmtpServer      = "172.16.30.21"
+$To              = "user@domain.de"
+$From            = "noreply@domain.de"
+$SmtpServer      = "SMTP IP"
 $SubjectTemplate = "IT Report - Top {0} failed logon users - {1:yyyy-MM-dd}"
 
 Write-Host "Using meta file path: $metaPath"
