@@ -3,8 +3,8 @@ $BaseDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $ScriptDir = Join-Path $BaseDir "scripts"
 $LogFile = Join-Path $BaseDir "RunReport.log"
 
-# $Scripts = @("FailedLogons.ps1", "Enrichment.ps1", "Exporter.ps1")
-$Scripts = @("FailedLogons.ps1", "Enrichment.ps1", "Exporter.ps1", "Send.ps1","cleaner.ps1")
+# Scripts = @("FailedLogons.ps1", "Enrichment.ps1", "Exporter.ps1")
+$Scripts = @("FailedLogons.ps1", "Enrichment.ps1", "Exporter.ps1", "Send.ps1", "Exporter_incl.ps1", "Send_incl.ps1", "cleaner.ps1")
 
 Add-Content $LogFile "`n=== Report Execution Started ==="
 Add-Content $LogFile "Timestamp: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')`n"

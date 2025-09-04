@@ -8,3 +8,9 @@ krb5.conf
 .gitattributes
 sso_http.keytab
 serial
+failed_logins
+CVE/smtpConfig.psd1
+CVE/ttbvapi.txt
+CVE/project_state.json
+CVE/chrash..txt
+CVE/older.7z
