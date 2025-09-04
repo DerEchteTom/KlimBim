@@ -7,9 +7,9 @@
 
 param(
     [switch]$Elevated,
-    [string]$To         = 'thomas.schmidt@technoteam.de',
-    [string]$From       = 'noreply@technoteam.de',
-    [string]$SmtpServer = '172.16.30.21',
+    [string]$To         = 'user@domain.de',
+    [string]$From       = 'noreply@domain.de',
+    [string]$SmtpServer = '1xx.xxx.xxx.xxx',
     [int]$SmtpPort      = 25
 )
 
