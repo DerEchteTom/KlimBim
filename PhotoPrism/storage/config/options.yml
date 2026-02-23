@@ -1,5 +1,0 @@
-DisableBackups: true
-DisableWebDAV: true
-Experimental: true
-RawPresets: false
-SiteUrl: http://172.16.8.3:2342/
