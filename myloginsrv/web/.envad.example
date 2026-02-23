@@ -1,8 +1,0 @@
-# .env â€“ zuletzt bearbeitet: 2025-05-15 16:09:30 Europe/Berlin
-AD_HOST=ldap://yourldap.server
-AD_PORT=389
-AD_BASE_DN=OU=user,DC=domain,DC=example
-AD_USER_ATTRIBUTE=sAMAccountName
-AD_DOMAIN=domain.example
-AD_BIND_DN=CN=ldapreader,OU=user,DC=domain,DC=example
-AD_BIND_PW=password
