@@ -1,6 +1,0 @@
-cmake
-gradio>=4.29.0
-face_recognition
-opencv-python
-numpy
-Pillow
